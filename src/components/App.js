@@ -1,13 +1,15 @@
 import React from 'react'
-import AddUser from '../containers/AddUser'
+import EditUser from '../containers/EditUser'
 import ShowUsers from '../containers/ShowUsers';
 import {getCookie} from '../utils/index'
-const loggedUserIsAdmin = getCookie('user')
+import AddUser from '../containers/AddUser';
+
 
 const App = ()=>(
+    
     <div>
-        <ShowUsers loggedUserIsAdmin={loggedUserIsAdmin} />
-        <AddUser loggedUserIsAdmin={loggedUserIsAdmin} />
+        <ShowUsers loggedUserIsAdmin={getCookie('isAdmin')} />
+        <AddUser loggedUserIsAdmin={getCookie('isAdmin')} />
     </div>
 )
 

@@ -9,7 +9,7 @@ import Pop from "../components/Pop"
 const AddUser =(props)=>{
     console.log(props)
     this.user={}
-     this.handleSubmit = (data) => {
+    this.handleSubmit = (data) => {
         const {inputFirstName,inputLastName,inputIsAdmin,inputPassword} = data
         if(!inputFirstName.trim()|| !inputLastName.trim()|| !inputIsAdmin.trim() || !inputPassword.trim() ){
             return

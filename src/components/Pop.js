@@ -9,11 +9,9 @@ class Pop extends Component{
             firstName:user.firstName,
             lastName:user.lastName,
             isAdmin:user.isAdmin,
-            password:user.password,
-            id:user.id,
-            
+            password:user.password 
         }
-        
+        console.log(this.state)
     }
     
     
@@ -21,24 +19,24 @@ class Pop extends Component{
         e.preventDefault();
         const {handleSubmit,user} = this.props
         let data={
-            id:user.id,
             inputFirstName :this.form.inputFirstName.value,
             inputLastName :this.form.inputLastName.value,
             inputIsAdmin :this.form.inputIsAdmin.value,
             inputPassword :this.form.inputPassword.value,
         }
         handleSubmit(data)
-        this.setState({firstName:'',lastName:'',password:'',isAdmin:null,id:null})
+        document.getElementById('modal'+user.id).style.display='none'
+        if(!user.id){
+            this.setState({firstName:'',lastName:'',password:'',isAdmin:''})
+        }
     }
+
     render(){
         const {trigger, user} = this.props
-        
         console.log(user)
         return(
-
-            <div >
-                <Modal id='modal' trigger={trigger} >
-                    <div>
+                <Modal id={"modal"+user.id} trigger={trigger}  >
+                 
                         <form  onSubmit={this.handleSubmit} ref={form => this.form = form}>
                             <Row >
                                 <Input 
@@ -46,7 +44,8 @@ class Pop extends Component{
                                     label="First Name"
                                     name="inputFirstName"
                                     value={this.state.firstName}
-                                    onChange={(e) => { this.setState({ firstName: e.target.value }) }} />
+                                    onChange={(e) => { this.setState({ firstName: e.target.value }) }}
+                                     />
                                 <Input
                                     s={6}
                                     label="Last Name" 
@@ -81,9 +80,9 @@ class Pop extends Component{
                                 <Button>Submit</Button>
                             </Row>
                         </form>        
-                    </div>
+                    
                  </Modal>
-            </div>
+            
         )
         
     }

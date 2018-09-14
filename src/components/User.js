@@ -21,7 +21,7 @@ class User extends Component{
                 <td>{user.isAdmin ? 'Admin':'User'}</td>
                 {
                     normalizeBoolean(loggedUserIsAdmin) &&
-                    <td>
+                    <td >
                         <EditUser user={user}/>
                         <Button onClick={onDelete}>Del</Button>
                     </td>
