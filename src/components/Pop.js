@@ -1,23 +1,23 @@
 import React,{Component} from 'react'
 import {Row,Input,Button,Modal} from 'react-materialize'
-import Popup from "reactjs-popup"
+
 class Pop extends Component{
     constructor(props){
         super(props)
         const{user} = this.props
+       
         this.state={
-            firstName:user.firstName,
-            lastName:user.lastName,
-            isAdmin:user.isAdmin,
-            password:user.password 
+            firstName: user? user.firstName:'',
+            lastName: user ?user.lastName:'',
+            isAdmin:user ?user.isAdmin:null,
+            password:user ?user.password:'' ,
+            id: user? user.id:null
         }
-        console.log(this.state)
+       
     }
-    
-    
     handleSubmit =(e)=>{
         e.preventDefault();
-        const {handleSubmit,user} = this.props
+        const {handleSubmit} = this.props
         let data={
             inputFirstName :this.form.inputFirstName.value,
             inputLastName :this.form.inputLastName.value,
@@ -25,17 +25,16 @@ class Pop extends Component{
             inputPassword :this.form.inputPassword.value,
         }
         handleSubmit(data)
-        document.getElementById('modal'+user.id).style.display='none'
-        if(!user.id){
+        document.getElementById('modal'+this.state.id).style.display='none'
+        if(!this.state.id){
             this.setState({firstName:'',lastName:'',password:'',isAdmin:''})
         }
     }
 
     render(){
-        const {trigger, user} = this.props
-        console.log(user)
+        const {trigger} = this.props
         return(
-                <Modal id={"modal"+user.id} trigger={trigger}  >
+                <Modal id={"modal"+this.state.id} trigger={trigger}  >
                  
                         <form  onSubmit={this.handleSubmit} ref={form => this.form = form}>
                             <Row >
@@ -80,7 +79,6 @@ class Pop extends Component{
                                 <Button>Submit</Button>
                             </Row>
                         </form>        
-                    
                  </Modal>
             
         )
